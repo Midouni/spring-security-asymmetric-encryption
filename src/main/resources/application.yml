@@ -23,3 +23,6 @@ spring:
       name: admin
       password: admin1234
 
+server:
+  servlet:
+    context-path: /api/v1
