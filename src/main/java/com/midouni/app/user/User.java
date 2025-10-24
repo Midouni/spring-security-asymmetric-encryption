@@ -1,6 +1,7 @@
 package com.midouni.app.user;
 
 import com.midouni.app.common.BaseEntity;
+import com.midouni.app.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -10,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -61,6 +64,22 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "IS_EMAIL_VERIFIED")
     private boolean emailVerified;
+
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE},
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(
+            name = "USER_ROLES",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLES_ID")
+            }
+    )
+    private List<Role> roles;
+    //private Set<Role> roles = new HashSet<>(); // to avoid duplicate
 
 
 
