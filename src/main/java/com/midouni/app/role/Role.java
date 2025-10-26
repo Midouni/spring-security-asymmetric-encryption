@@ -4,6 +4,7 @@ import com.midouni.app.common.BaseEntity;
 import com.midouni.app.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -12,15 +13,15 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Table(name = "ROLES")
 public class Role extends BaseEntity {
     @Id
     @GeneratedValue
     private String id;
 
-    @Column(name = "ROLE_NAME", nullable = false, unique = true, length = 50)
-    private String roleName;
+    @Column(name = "NAME", nullable = false, unique = true, length = 50)
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
