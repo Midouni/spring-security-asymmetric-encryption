@@ -5,9 +5,13 @@ import com.midouni.app.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -23,7 +27,7 @@ import java.util.Set;
 @Builder
 @Table(name = "USER")
 @EntityListeners(AuditingEntityListener.class)
-public class User extends BaseEntity implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -64,6 +68,14 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "IS_EMAIL_VERIFIED")
     private boolean emailVerified;
+
+    @CreatedDate
+    @Column(name = "CREATE_DATE", updatable = false)
+    private LocalDate createdDate;
+
+    @LastModifiedDate
+    @Column(name = "UPDATED_DATE", insertable = false)
+    private LocalDate updatedDate;
 
     @ManyToMany(
             cascade = {CascadeType.PERSIST,CascadeType.MERGE},
@@ -116,7 +128,13 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(CollectionUtils.isEmpty(this.roles)) {
         return List.of();
+        }
+        return  this.roles
+                .stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .toList();
     }
 
     public String getFullName() {
