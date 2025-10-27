@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UpdateProfile {
+public class ProfileUpdateRequest {
     private String firstName;
     private String lastName;
     private LocalDate birthday;

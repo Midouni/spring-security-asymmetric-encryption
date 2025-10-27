@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChangePassword {
+public class ChangePasswordRequest {
     private String currentPassword;
     private String newPassword;
     private String confirmPassword;
