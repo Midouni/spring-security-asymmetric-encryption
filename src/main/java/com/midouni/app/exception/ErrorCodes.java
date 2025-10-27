@@ -6,7 +6,11 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCodes {
 
-    USER_NOT_FOUND("USER_NOT_FOUND","User with id: %s Not Found", HttpStatus.NOT_FOUND),;
+    USER_NOT_FOUND("USER_NOT_FOUND","User with id: %s Not Found", HttpStatus.NOT_FOUND),
+    CHANGE_PASSWORD_MISMATCH("CHANGE_PASSWORD_MISMATCH","Change Password Mismatch", HttpStatus.BAD_REQUEST),
+    INVALID_CURRENT_PASSWORD("INVALID_CURRENT_PASSWORD","Invalid Current Password" , HttpStatus.BAD_REQUEST ),
+    ACCOUNT_ALREADY_DEACTIVATED("ACCOUNT_ALREADY_DEACTIVATED","Account Already Activated" , HttpStatus.BAD_REQUEST ),
+    ACCOUNT_ALREADY_ACTIVATED("ACCOUNT_ALREADY_ACTIVATED","Account Already Activated" , HttpStatus.BAD_REQUEST ),;
 
     private final String code;
     private final String defaultMessage;
