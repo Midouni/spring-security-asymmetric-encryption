@@ -22,7 +22,15 @@ spring:
     user:
       name: admin
       password: admin1234
+    jwt:
+      private-key-path: classpath:keys/local-only/private_key.pem
+      public-key-path: classpath:keys/local-only/public_key.pem
+      access-token-expiration: 3600000 # an hour for local testing, for prod env i prefer 15 minutes
+      refresh-token-expiration: 604800000 # 7 days
 
 server:
   servlet:
     context-path: /api/v1
+
+
+
