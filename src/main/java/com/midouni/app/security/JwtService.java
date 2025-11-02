@@ -45,7 +45,7 @@ public class JwtService {
 
     public boolean isTokenValid(String token, String expectedEmail) {
         final String email = extractEmail(token);
-        return email.equals(expectedEmail) && isTokenExpired(token);
+        return email.equals(expectedEmail) && !isTokenExpired(token);
     }
 
     public String refreshAccessToken(String refreshToken)  {
@@ -74,7 +74,7 @@ public class JwtService {
         return extractClaims(token).getExpiration().before(new Date());
     }
 
-    private String extractEmail(String token) {
+    public String extractEmail(String token) {
         return extractClaims(token).getSubject();
     }
 
