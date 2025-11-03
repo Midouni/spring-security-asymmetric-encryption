@@ -10,7 +10,10 @@ public enum ErrorCodes {
     CHANGE_PASSWORD_MISMATCH("CHANGE_PASSWORD_MISMATCH","Change Password Mismatch", HttpStatus.BAD_REQUEST),
     INVALID_CURRENT_PASSWORD("INVALID_CURRENT_PASSWORD","Invalid Current Password" , HttpStatus.BAD_REQUEST ),
     ACCOUNT_ALREADY_DEACTIVATED("ACCOUNT_ALREADY_DEACTIVATED","Account Already Activated" , HttpStatus.BAD_REQUEST ),
-    ACCOUNT_ALREADY_ACTIVATED("ACCOUNT_ALREADY_ACTIVATED","Account Already Activated" , HttpStatus.BAD_REQUEST ),;
+    ACCOUNT_ALREADY_ACTIVATED("ACCOUNT_ALREADY_ACTIVATED","Account Already Activated" , HttpStatus.BAD_REQUEST ),
+    EMAIL_ALREADY_EXIST("EMAIL_ALREADY_EXIST","Email Already Exist" , HttpStatus.BAD_REQUEST ),
+    PHONE_ALREADY_EXIST("PHONE_ALREADY_EXIST" ,"Phone Already Exist" , HttpStatus.BAD_REQUEST ),
+    PASSWORD_MISMATCH("PASSWORD_MISMATCH","Password Mismatch" , HttpStatus.BAD_REQUEST ),;
 
     private final String code;
     private final String defaultMessage;
