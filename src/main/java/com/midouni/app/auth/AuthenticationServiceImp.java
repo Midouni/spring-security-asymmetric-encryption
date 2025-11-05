@@ -69,8 +69,9 @@ public class AuthenticationServiceImp implements AuthenticationServices{
 
     @Override
     public AuthenticationResponse refresh(RefreshRequest request) {
-
-        return null;
+        final String newAccessToken = this.jwtService.refreshAccessToken(request.getRefreshToken());
+        final String tokenType="Bearer";
+        return AuthenticationResponse.builder().accessToken(newAccessToken).refreshToken(tokenType).tokenType(tokenType).build();
     }
 
     private void checkPassword(String password, String confirmPassword) {
